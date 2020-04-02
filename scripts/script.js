@@ -12,7 +12,7 @@ let n, r, c, t;
 
 // ----------------------------------------------
 alert('Я загадаю число от 1 до 10.\nПопробуй угадай его!');
-let r = getRanomInt(1, 10);
+r = getRanomInt(1, 10);
 
 let guessNumber = function() {
 
