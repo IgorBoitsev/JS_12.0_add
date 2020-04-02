@@ -4,15 +4,14 @@ let isNumber = function(n) {
   return !isNaN(n) && isFinite(n);
 }
 // Функция задания случайного числа
-let getRanomInt = function(min, max) {
+let getRandomInt = function(min, max) {
   return Math.floor(Math.random() * (max + 1 - min)) + min;
 }
 
 let n, r, c, t;
 
 // ----------------------------------------------
-alert('Я загадаю число от 1 до 10.\nПопробуй угадай его!');
-r = getRanomInt(1, 10);
+
 
 let guessNumber = function() {
 
@@ -34,8 +33,16 @@ let guessNumber = function() {
       alert('Загаданное число больше.');
       guessNumber();
     } else {
-      return alert('Конгратюляции! Это было оно!');
+      return alert('***Конгратюляции!*** Это было оно!');
     }
+}
+
+r = getRandomInt(1, 10);
+
+let guessNumberPreparation = function(r) {
+  alert('Я загадаю число от 1 до 10.\nПопробуй угадай его!');
+  
+  return guessNumber();
 }
 
 guessNumber();
@@ -48,7 +55,7 @@ console.log('Загаданное число: ' + r);
 //   // Количество попыток
 //   t = 10;
 //   alert('Я загадаю число от 1 до 10.\nПопробуй угадай его! У тебя всего ' + t + ' попыток!');
-//   r = getRanomInt(1, 10);
+//   r = getRandomInt(1, 10);
 //   c = 0;
 // }
 
