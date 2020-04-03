@@ -8,94 +8,91 @@ let getRandomInt = function(min, max) {
   return Math.floor(Math.random() * (max + 1 - min)) + min;
 }
 
-let n, r, c, t;
+let number, random, count, attempt;
 
 // ----------------------------------------------
+// let guessNumber = function() {
 
-
-let guessNumber = function() {
-
-  n = +prompt('Введи число! Твой вариант: ');
-
-  // Если пользователь нажал "Отмена", игра заканчивается
-  if (n == 0)
-    return alert('Ой, фсё.');
-
-  // Проверка вводимого числа
-  if (isNumber(n) == false) {
-    guessNumber();
-  }
-
-  if (n > r) {
-    alert('Загаданное число меньше.');
-    guessNumber();
-  } else if (n < r) {
-      alert('Загаданное число больше.');
-      guessNumber();
-    } else {
-      return alert('***Конгратюляции!*** Это было оно!');
-    }
-}
-
-r = getRandomInt(1, 10);
-
-let guessNumberPreparation = function(r) {
-  alert('Я загадаю число от 1 до 10.\nПопробуй угадай его!');
-  
-  return guessNumber();
-}
-
-guessNumber();
-
-console.log('Загаданное число: ' + r);
-
-// ----------------------------------------------
-// Функция подготовки к игре
-// let guessNumberPreparation = function() {
-//   // Количество попыток
-//   t = 10;
-//   alert('Я загадаю число от 1 до 10.\nПопробуй угадай его! У тебя всего ' + t + ' попыток!');
-//   r = getRandomInt(1, 10);
-//   c = 0;
-// }
-
-// let guessNumber = function(t, c) {
-
-//   if (t == 0) {
-//     if (confirm('У тебя больше не осталось попыток. Хотите сыграть еще')) {
-//       guessNumberPreparation();
-//       guessNumber(t, c);
-//     } else {
-//         return alert('Ой, фсё.');
-//       }
-//   }
-//   c += 1;
-
-//   n = +prompt('Введи число! У тебя ' + t + ' попыток. Твой вариант: ');
+//   number = +prompt('Введи число! Твой вариант: ');
 
 //   // Если пользователь нажал "Отмена", игра заканчивается
-//   if (n == 0)
+//   if (number == 0)
 //     return alert('Ой, фсё.');
 
 //   // Проверка вводимого числа
-//   if (isNumber(n) == false) {
-//     guessNumber(t, c);
+//   if (isNumber(number) == false) {
+//     guessNumber();
 //   }
 
-//   if (n > r) {
+//   if (number > random) {
 //     alert('Загаданное число меньше.');
-//     guessNumber(t - 1, c);
-//   } else if (n < r) {
+//     guessNumber();
+//   } else if (number < random) {
 //       alert('Загаданное число больше.');
-//       guessNumber(t - 1, c);
-//     } else if (confirm('***Конгратюляции!***\nЭто было оно!\nТы смог угадать с ' + c + ' раза!\nХочешь сыграть еще?')) {
-//         guessNumberPreparation();
-//         guessNumber(t, c);
-//       } else
-//       return alert('Ой, фсё.');
+//       guessNumber();
+//     } else {
+//       console.log('Загадано было число: ' + random);
+//       return alert('***Конгратюляции!*** Это было оно!');
+//     }
+// }
+
+// let guessNumberPreparation = function() {
+//   alert('Я загадаю число от 1 до 10.\nПопробуй угадай его!');
+//   random = getRandomInt(1, 10);
+
+//   return guessNumber();
 // }
 
 // guessNumberPreparation();
-// guessNumber(t, c);
 
-// console.log('Загаданное число: ' + r);
+// ----------------------------------------------
+// Функция подготовки к игре
+let guessNumberPreparation = function() {
+  // Количество попыток
+  attempt = 10;
+  alert('Я загадаю число от 1 до 10.\nПопробуй угадай его! У тебя всего ' + attempt + ' попыток!');
+  random = getRandomInt(1, 10);
+  count = 0;
+
+  return guessNumber(attempt, count);
+}
+
+let guessNumber = function(attempt, count) {
+
+  if (attempt == 0) {
+    if (confirm('У тебя больше не осталось попыток. Хотите сыграть еще')) {
+      guessNumberPreparation();
+      guessNumber(attempt, count);
+    } else {
+        return alert('Ой, фсё.');
+      }
+  }
+  count += 1;
+
+  number = +prompt('Введи число! У тебя ' + attempt + ' попыток. Твой вариант: ');
+
+  // Если пользователь нажал "Отмена", игра заканчивается
+  if (number == 0)
+    return alert('Ой, фсё.');
+
+  // Проверка вводимого числа
+  if (isNumber(number) == false) {
+    guessNumber(attempt, count);
+  }
+
+  if (number > random) {
+    alert('Загаданное число меньше.');
+    guessNumber(attempt - 1, count);
+  } else if (number < random) {
+      alert('Загаданное число больше.');
+      guessNumber(attempt - 1, count);
+    } else if (confirm('***Конгратюляции!***\nЭто было оно!\nТы смог угадать с ' + count + ' раза!\nХочешь сыграть еще?')) {
+        guessNumberPreparation();
+        guessNumber(attempt, count);
+      } else {
+        console.log('Загаданное число: ' + random);
+        return alert('Ой, фсё.');
+        }
+}
+
+guessNumberPreparation();
